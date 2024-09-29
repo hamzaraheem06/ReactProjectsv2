@@ -1,13 +1,15 @@
-import { useState } from "react";
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { Header, Footer } from "./components";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+function Layout() {
   return (
     <>
-      <div></div>
+      <Header />
+      <Outlet />
+      <Footer />
     </>
   );
 }
 
-export default App;
+export default Layout;
