@@ -1,13 +1,19 @@
-import { useState } from 'react'
+
+import "./index.css"
+import UserContextProvider from './context/UserContextProvider';
+import Login from './components/Login';
+import Profile from './components/Profile';
 
 function App() {
 
 
   return (
-    <>
-      
-    </>
+    <UserContextProvider>
+      <h1>Learing Context API</h1>
+      <Login />
+      <Profile />
+    </UserContextProvider>
   )
 }
 
-export default App
+export default App;
