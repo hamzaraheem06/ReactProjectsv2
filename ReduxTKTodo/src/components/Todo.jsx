@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {removeTodo} from '../features/todo/todoSlice'
 
-function Todos() {
+function Todo() {
     const todos = useSelector(state => state.todos)
     const dispatch = useDispatch()
 
@@ -42,4 +42,4 @@ function Todos() {
   )
 }
 
-export default Todos
+export default Todo
