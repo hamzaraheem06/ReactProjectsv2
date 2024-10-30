@@ -1,6 +1,6 @@
 # How did I created this App?
 
-** 1. For Backend, we used Appwrite to provide backend as service. We created _Env_ variable. **
+**1. For Backend, we used Appwrite to provide backend as service. We created _Env_ variable.**
 
 **What are Env variable?**
 
