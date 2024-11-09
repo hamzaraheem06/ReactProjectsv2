@@ -4,7 +4,7 @@ I used Appwrite backend service to create all the backend handling of the blog a
 
 ## **1. Created the Environment Variables**
 
-**What are Env variable?**
+#### **What are Env variable?**
 
 When we create an app, we want application to communicate with database or api. For keeping all the information safe, we create env file so that nothing gets revealed to public users.
 
@@ -81,3 +81,49 @@ export class DatabaseService {
 
 - Create newPost, updatePost and all the database methods required like we did in auth.js using the try catch approach.
 - Create file methods to upload and delete a file. This is done using the Storage object provided in the "appwrite"
+
+## **4. Created a store using Redux Toolkit**
+
+#### **What is a store Hamza?**
+
+If I were to make it complicated I could. But it is not. It is just like a global file which has storage of most items. We need it to prevent props drilling. Now what is prop drilling Hamza? So in easy words, when we want to pass some variable to inner most element. We have to pass it to every outer element that include that element. This creates a lot of unnecessary props passing. So we use Redux Toolkit to create a global store that is accessable to all the elements, and use the variables directly when needed.
+
+**The following steps show how to create a store.**
+
+- Create a new folder Store anywhere you want.
+- Create a new file store.js, import configureStore from "@reduxjs/toolkit", and create and export store using the imported method
+
+```javascript
+import { configureStore } from "@reduxjs/toolkit";
+
+const store = configureStore({});
+
+export default store;
+```
+
+- After store has been created, create a slice for every Service.
+- Create slice and export reducers/actions using createSlice provided in "@reduxjs/toolkit"
+
+  **Slice:** A slice is an object, that contains the name of store portion, initialState, and reducers (or actions, functions that allow us to make changes in store).
+
+  **How to create reducers:**
+
+  _Syntax:_
+
+  reducerName: (state, action) => {body of reducer}
+
+```javascript
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {};
+
+const slice = createSlice({
+  name: "slice name",
+  initialState,
+  reducers: {},
+});
+
+export const { reducers } = slice.actions;
+
+export default slice.reducer;
+```
