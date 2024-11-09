@@ -1,6 +1,8 @@
 # How did I created this App?
 
-**1. For Backend, we used Appwrite to provide backend as service. We created _Env_ variable.**
+I used Appwrite backend service to create all the backend handling of the blog app.
+
+## **1. Created the Environment Variables**
 
 **What are Env variable?**
 
@@ -19,7 +21,7 @@ When we create an app, we want application to communicate with database or api. 
 
 To efficiently use these env variables. create a config folder in src, file named config.js and export an object with key value pairs of these variables
 
-**2. Built the authentication service.**
+## **2. Built the authentication service.**
 
 This is create to make user account who will use the blog app. For this we will also use Appwrite Authentication Service. _Hamza Please go through appwrite authentication documentation after the project._
 
@@ -56,3 +58,26 @@ export class AuthService {
 
 - **Advantage of using this technique of Authentication Service?**
   This Code is now future proof. If there is any change in the authentication service channel, you can just come to src/appwrite/auth.js and make your changes, without making any changes to your frontend. Moreover, the code mentioned above is reusable, it is created in a sense that you can copy paste it any of your new project and use it. There will almost, if not minor, no changes in the code.
+
+## **3. Built the Database Related services.**
+
+This is very similar to the way we created the authentication service due to uniformity in the Appwrite services. These will include all the database storing, creating and access API calls.
+
+- After creating a basic class-based approach to create a DatabaseService class, start creating all the required methods as we did in Authentication
+
+```javascript
+export class DatabaseService {
+  client = new Client();
+  database;
+  storage;
+
+  constructor() {
+    this.client.setEndpoint(config.appwriteUrl).setProject(config.projectId); // connecting the database for client registration
+    this.database = new Databases(this.client);
+    this.storage = new Storage(this.storage);
+  }
+}
+```
+
+- Create newPost, updatePost and all the database methods required like we did in auth.js using the try catch approach.
+- Create file methods to upload and delete a file. This is done using the Storage object provided in the "appwrite"
