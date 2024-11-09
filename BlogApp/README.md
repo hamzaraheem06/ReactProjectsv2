@@ -1,13 +1,13 @@
 # How did I created this App?
 
-1. For Backend, we used Appwrite to provide backend as service. We created _Env_ variable.
+**1. For Backend, we used Appwrite to provide backend as service. We created _Env_ variable.**
 
 **What are Env variable?**
 
 When we create an app, we want application to communicate with database or api. For keeping all the information safe, we create env file so that nothing gets revealed to public users.
 
 - create a .env file in root of your project. Root is not src folder.
-- Write in uppercase for create react app ( REACT_APP_APPWRITE_URL and assign values to it. REACT_APP_YOUR_VARIABLE is the naming rule. To access the variable use **process.env.REACT_APP_APPWRITE_YOUR_VARIABLE** ), for vite (VITE_YOUR_VARIABLE for name convection, and to access use import.meta.env.VITE_YOUR_VARIABLE). Using this name convention, create all your env variables.
+- Write in uppercase for **create react app** ( REACT_APP_APPWRITE_URL and assign values to it. REACT_APP_YOUR_VARIABLE is the naming rule. To access the variable use **process.env.REACT_APP_APPWRITE_YOUR_VARIABLE** ), **for vite** (VITE_YOUR_VARIABLE for name convection, and to access use **import.meta.env.VITE_YOUR_VARIABLE**). Using this name convention, create all your env variables.
 
 - create a duplicate .env.sample file for your convinence and use, and empty the env variables.
 - Add the .env to gitignore so that it should not get public, unintentionally.
@@ -18,3 +18,41 @@ When we create an app, we want application to communicate with database or api. 
 - after collection, go to storage to create bucket. and paste its id in .env file. also, set it permissions.
 
 To efficiently use these env variables. create a config folder in src, file named config.js and export an object with key value pairs of these variables
+
+**2. Built the authentication service.**
+
+This is create to make user account who will use the blog app. For this we will also use Appwrite Authentication Service. _Hamza Please go through appwrite authentication documentation after the project._
+
+We will be using the Service approach, so that if in future we want to use another service ( class based approach ) for authentication, it doesn't disturb all of the code base.
+
+- Create an appwrite folder in src folder to manage all the Appwrite Related Services.
+- Create a auth.js folder for Authentication Service.
+- Import all the necessary authentication objects i.e. Client, Account, ID from "appwrite"
+- Create a class AuthService and Create an object using this class and export the object.
+- **Why Create an object when you can directly export the class?**
+
+If we export the class we would need to use it again and again at our register service for new user and expose our authentication service with the UI elements. However, when we use object export technique. We can just export the ojbect once and use every method directly.
+
+```javascript
+export class AuthService {
+  client = new Client();
+  account;
+
+  constructor() {
+    this.client.setEndpoint(config.appwriteUrl).setProject(config.projectId); // connecting the database for client registration
+    this.account = new Account(this.client); // creating new account using the client
+  }
+}
+```
+
+- In the AuthService Class, create client using Client, and account Property. Dont copy paste the Appwrite code. Instead use the constructor, so whenever the a new user i.e. authService object is created then the client and account should be created and not when the class is created.
+
+- Create new user using all the methods provided by account Appwrite Authentication Service.
+
+- Create Async function for every operation like Sign up, login, etc
+
+- **Why did we not created it directly like in appwrite documentation?**
+  Suppose you are now a Full Stack Developer and created your own database. And you want to shift authentication to your database. You will just change the try catch block and made some modification in the constructor and you will be set to go. You are not dependent on appwrite.
+
+- **Advantage of using this technique of Authentication Service?**
+  This Code is now future proof. If there is any change in the authentication service channel, you can just come to src/appwrite/auth.js and make your changes, without making any changes to your frontend. Moreover, the code mentioned above is reusable, it is created in a sense that you can copy paste it any of your new project and use it. There will almost, if not minor, no changes in the code.
