@@ -127,3 +127,15 @@ export const { reducers } = slice.actions;
 
 export default slice.reducer;
 ```
+
+- There are mainly two methods used after store creation
+
+  - useDispatch to display something or add something
+    useDispatch(reducer(data))
+    useDispatch uses reducers to update store, so create a function use useDispatch it expects a reducer and pass your value to it
+
+  - useSelector is used access to state of the store
+
+    useSelector((state)=> state.values)
+
+## **5. Created components (UI) for the application**
