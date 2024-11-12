@@ -8,16 +8,15 @@ function PostCard({ $id, featuredImage, title }) {
 
   return (
     <Link to={`/post/${$id}`}>
-      <div className="card card-side bg-base-100 shadow-xl">
+      <div className="card bg-base-100 image-full w-96 shadow-xl">
         <figure>
           <img
-            className="w-52 h-72 object-cover"
             src={databaseService.getFilePreview(featuredImage)}
-            alt="Featured Blog Image"
+            alt={title}
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{title}</h2>
+          <h2 className="card-title">SpiderMan: No way Home{title}</h2>
           <p>A Blog about "{title}"</p>
           <div className="card-actions justify-end">
             <Button
