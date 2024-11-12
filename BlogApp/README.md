@@ -139,3 +139,12 @@ export default slice.reducer;
     useSelector((state)=> state.values)
 
 ## **5. Created components (UI) for the application**
+
+For Frontend UI components, I used an opensource React UI Library, daisyUI, for design consistency and as mentioned in daisyUI to make the UI look gooood.
+
+**The following points are kept in mind while creating the components:**
+
+- The components are more production based, meaning they are prop controlled. We can use a single component to perform a little different operation by changing the props value when using in Parent Component.
+- I used only a single UI library instead of multiple to maintain the design consistency.
+- Pretend this is a third reason, because a list with more than two items looks more accurate then a list with 2 items.
+- Yes, I copied the third point from daisyUI documentation. So what, I copied the components too.
